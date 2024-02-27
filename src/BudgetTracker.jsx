@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import Tracker from './components/BudgetTracker'
 
 const BudgetTracker = () => {
     return (
@@ -9,7 +10,7 @@ const BudgetTracker = () => {
             <div className="container">
                 <h1>Welcome to the Budget Tracker!</h1>
             </div>
-            <Footer />
+            <Tracker /> 
         </div>
     );
 };
