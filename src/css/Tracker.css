@@ -1,0 +1,29 @@
+.BudgetTracker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .BudgetTracker div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .BudgetTracker label {
+    margin-bottom: 10px;
+  }
+  
+  .BudgetTracker input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
