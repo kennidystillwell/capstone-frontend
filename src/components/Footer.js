@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import LogoFacebook from "../images/facebook.png";
 import LogoInstagram from "../images/instagram.png";
 import LogoTwitter from "../images/twitter.png";
-import "../css/shared.css";
+import '../css/Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="page-footer blue darken-2" style={{ position: "absolute", bottom: "0", width: "100%" }}>
+    <footer className="page-footer green lighten-1">
       <div className="container">
         <div className="row">
           <div className="col l6 s12">

@@ -1,0 +1,33 @@
+.bottom-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 9999;
+}
+
+.container {
+    padding-top: 20px;
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+.main-header,
+.sub-header {
+    font-family: 'Trispace', sans-serif;
+}
+
+.header-5 {
+    font-size: 1.64rem;
+}
+
+.social-icons img.social-icon {
+    width: 24px; 
+    height: 24px;
+    margin-right: 15px;
+}
