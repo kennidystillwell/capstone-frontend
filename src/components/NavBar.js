@@ -1,35 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import M from 'materialize-css';
-import '../materialize/css/materialize.min.css';
+import "materialize-css/dist/css/materialize.min.css";
 import '../css/NavBar.css';
 
 const Navbar = () => {
-  // State to manage the mobile navigation menu
   const [isOpen, setIsOpen] = useState(false);
-
-  // Reference to the navigation container for handling clicks outside
   const navRef = useRef(null);
 
-  // Function to toggle the mobile navigation menu
   const toggleNav = () => {
     setIsOpen(!isOpen);
   };
 
-  // Function to close the mobile navigation menu when a link is clicked
   const handleLinkClick = () => {
     setIsOpen(false);
   };
 
-  // Function to handle clicks outside the navigation container and close the menu
   const handleClickOutside = (event) => {
-    // Close the menu if clicked outside the navigation container
     if (navRef.current && !navRef.current.contains(event.target)) {
       setIsOpen(false);
     }
   };
 
-  // Effect hook to add and remove click event listener for handling clicks outside
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
 
@@ -40,15 +32,11 @@ const Navbar = () => {
 
   return (
     <div>
-      {/* Navigation bar with desktop and mobile versions */}
-      <nav className="blue" role="navigation">
+      <nav className="green darken-1" role="navigation">
         <div className="nav-wrapper container" ref={navRef}>
-          {/* Brand logo */}
           <a id="logo-container" href="/" className="brand-logo">
-            BudgetBuddy
+            Budget Buddy
           </a>
-
-          {/* Desktop navigation links */}
           <ul className="right hide-on-med-and-down">
             <li>
               <Link to="/budget-tracker" onClick={handleLinkClick}>
@@ -60,15 +48,12 @@ const Navbar = () => {
                 Resources
               </Link>
             </li>
-            {/* Added Login option */}
             <li>
               <Link to="/login" onClick={handleLinkClick}>
                 Login
               </Link>
             </li>
           </ul>
-
-          {/* Mobile navigation menu */}
           <ul
             id="nav-mobile"
             className={`sidenav ${isOpen ? "open" : ""}`}
@@ -85,15 +70,12 @@ const Navbar = () => {
                 Resources
               </Link>
             </li>
-            {/* Added Login option */}
             <li>
               <Link to="/login" onClick={handleLinkClick}>
                 Login
               </Link>
             </li>
           </ul>
-
-          {/* Mobile menu trigger button */}
           <a
             href="#"
             data-target="nav-mobile"
