@@ -8,7 +8,6 @@ const Login = () => {
         <div>
             <NavBar />
             <div className="container">
-                <h1>Welcome to the Login!</h1>
                 <LoginForm></LoginForm>
             </div>
             <Footer />

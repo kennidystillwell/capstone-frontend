@@ -5,6 +5,7 @@ import BudgetTracker from './BudgetTracker';
 import Resources from './Resources';
 import Login from './Login';
 import Footer from "./components/Footer";
+import SignUp from './SignUp';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/budget-tracker' element={<BudgetTracker />} />
           <Route path='/resources' element={<Resources />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/signup' element= {<SignUp />} />  
         </Routes>
       </div>
     </Router>
