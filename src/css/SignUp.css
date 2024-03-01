@@ -1,14 +1,14 @@
-.login-container {
+.sign-up-container {
     text-align: center;
     margin: 50px auto;
-    max-width: 400px;
+    width: 50%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.login-container h4 {
+.sign-up-container h4 {
     margin-bottom: 20px;
     text-align: center;
 }
@@ -18,6 +18,18 @@
 }
   
 .btn {
-    width: 200px;
+    width: 300px;
     margin: 0 auto;
 }
+
+.password-input {
+    position: relative;
+  }
+  
+  .btn-toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+  

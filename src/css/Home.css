@@ -1,6 +1,6 @@
-.navbar-spacing {
-    padding-bottom: 20px; /* Adjust the padding to make the navbar taller */
-}
+body {
+    background: linear-gradient(to bottom, #dcedc8, #fafafa, #dcedc8);
+  }
 
 .custom-row {
     display: flex;
