@@ -1,0 +1,23 @@
+.smaller-card {
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.smaller-card h5 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.smaller-card p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+}

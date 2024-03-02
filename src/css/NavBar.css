@@ -1,3 +1,17 @@
 .dropdown-content li a {
     font-style: normal !important;
 }
+
+.nav-wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+  
+.nav-wrapper ul {
+    margin-right: 15px;
+}
+  
+.nav-wrapper ul li {
+    margin: 0 10px;
+}
+  
