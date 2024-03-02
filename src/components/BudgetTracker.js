@@ -5,6 +5,8 @@ import taxData from '../data/tax.json';
 import Select from 'react-select';
 import '../css/Tracker.css';
 
+import { useNavigate } from 'react-router-dom';
+
 // Have to register stuff I want to use for Chart.js here and in the import above!
 Chart.register(PieController, ArcElement, CategoryScale, Title, Legend);
 
@@ -84,12 +86,12 @@ function BudgetTracker() {
   const [income, setIncome] = useState(0);
   const [payFrequency, setPayFrequency] = useState('');
   const [payType, setPayType] = useState('');
-  const [dependents, setDependents] = useState(0);
   const [state, setState] = useState('');
   const [federalTaxes, setFederalTaxes] = useState(0);
   const [stateTaxes, setStateTaxes] = useState(0);
   const [finalIncome, setFinalIncome] = useState(0);
   const [inputIncome, setInputIncome] = useState(0);
+  const navigate = useNavigate();
   // useRef hook to reference the chart element 
   const chartRef = useRef(null);
   // useRef hook to reference the chart instance 
@@ -254,16 +256,9 @@ function BudgetTracker() {
             </label>
           </div>
           <canvas ref={chartRef} />
-        <div>
-          <h2>Summary</h2>
-          <p>Income: {income}</p>
-          <p>Federal Taxes: {federalTaxes.toFixed(2)}</p>
-          <p>State Taxes: {stateTaxes.toFixed(2)}</p>
-          <p>Pay Frequency: {payFrequency}</p>
-          <p>Pay Type: {payType}</p>
-          <p>State: {state}</p>
-          <h2>Final Amount: {income - federalTaxes - stateTaxes}</h2>
-        </div>
+          <button onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state } })}>
+  Go to Summary
+</button>
         </div>
       );
 }
