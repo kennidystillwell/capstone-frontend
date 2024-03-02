@@ -27,3 +27,8 @@
     padding: 10px;
     box-sizing: border-box;
   }
+  canvas {
+    position: fixed;
+    right: 0;
+    top: 60px;
+  }

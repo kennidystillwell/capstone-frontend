@@ -1,27 +1,95 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, PieController, ArcElement, CategoryScale, Title, Legend } from 'chart.js';
+import taxData from '../data/tax.json';
+// Used for the dropdowns!!
+import Select from 'react-select';
 import '../css/Tracker.css';
 
-// Have to register stuff I use for Chart.js
+// Have to register stuff I want to use for Chart.js here and in the import above!
 Chart.register(PieController, ArcElement, CategoryScale, Title, Legend);
+
+// Options for the Select components
+const payFrequencyOptions = [
+    { value: 'weekly', label: 'Weekly' },
+    { value: 'biweekly', label: 'Bi-Weekly' },
+  ];
+  
+  const payTypeOptions = [
+    { value: 'hourly', label: 'Hourly' },
+    { value: 'salary', label: 'Salary' },
+  ];
+  
+  const stateOptions = [
+    { value: 'Alabama', label: 'Alabama' },
+    { value: 'Alaska', label: 'Alaska' },
+    { value: 'Arizona', label: 'Arizona' },
+    { value: 'Arkansas', label: 'Arkansas' },
+    { value: 'California', label: 'California' },
+    { value: 'Colorado', label: 'Colorado' },
+    { value: 'Connecticut', label: 'Connecticut' },
+    { value: 'Delaware', label: 'Delaware' },
+    { value: 'Florida', label: 'Florida' },
+    { value: 'Georgia', label: 'Georgia' },
+    { value: 'Hawaii', label: 'Hawaii' },
+    { value: 'Idaho', label: 'Idaho' },
+    { value: 'Illinois', label: 'Illinois' },
+    { value: 'Indiana', label: 'Indiana' },
+    { value: 'Iowa', label: 'Iowa' },
+    { value: 'Kansas', label: 'Kansas' },
+    { value: 'Kentucky', label: 'Kentucky' },
+    { value: 'Louisiana', label: 'Louisiana' },
+    { value: 'Maine', label: 'Maine' },
+    { value: 'Maryland', label: 'Maryland' },
+    { value: 'Massachusetts', label: 'Massachusetts' },
+    { value: 'Michigan', label: 'Michigan' },
+    { value: 'Minnesota', label: 'Minnesota' },
+    { value: 'Mississippi', label: 'Mississippi' },
+    { value: 'Missouri', label: 'Missouri' },
+    { value: 'Montana', label: 'Montana' },
+    { value: 'Nebraska', label: 'Nebraska' },
+    { value: 'Nevada', label: 'Nevada' },
+    { value: 'New Hampshire', label: 'New Hampshire' },
+    { value: 'New Jersey', label: 'New Jersey' },
+    { value: 'New Mexico', label: 'New Mexico' },
+    { value: 'New York', label: 'New York' },
+    { value: 'North Carolina', label: 'North Carolina' },
+    { value: 'North Dakota', label: 'North Dakota' },
+    { value: 'Ohio', label: 'Ohio' },
+    { value: 'Oklahoma', label: 'Oklahoma' },
+    { value: 'Oregon', label: 'Oregon' },
+    { value: 'Pennsylvania', label: 'Pennsylvania' },
+    { value: 'Rhode Island', label: 'Rhode Island' },
+    { value: 'South Carolina', label: 'South Carolina' },
+    { value: 'South Dakota', label: 'South Dakota' },
+    { value: 'Tennessee', label: 'Tennessee' },
+    { value: 'Texas', label: 'Texas' },
+    { value: 'Utah', label: 'Utah' },
+    { value: 'Vermont', label: 'Vermont' },
+    { value: 'Virginia', label: 'Virginia' },
+    { value: 'Washington', label: 'Washington' },
+    { value: 'West Virginia', label: 'West Virginia' },
+    { value: 'Wisconsin', label: 'Wisconsin' },
+    { value: 'Wyoming', label: 'Wyoming' },
+    { value: 'District of Columbia', label: 'District of Columbia' },
+  ];
 
 // BudgetTracker component
 function BudgetTracker() {
   // Defining state variables using React's useState hook and setting their initial values to 0 or an empty string this will allow us to update them live >:3
+  //Things deleted from the original code: alienStatus, maritalStatus, otherIncome, payDate, takehome, overtime, and benefits 
+  //Many of these can be readded if needed but for now I will leave them out
+  //may add option for user to state how many hours they work a week and then calculate the income based on that
+  //Create goal for user to set and then calculate how much they need to save to reach that goal
+  //Way for user to add expenses?!?!?! food, bills... etc
   const [income, setIncome] = useState(0);
   const [payFrequency, setPayFrequency] = useState('');
   const [payType, setPayType] = useState('');
-  const [overtime, setOvertime] = useState(0);
-  const [payDate, setPayDate] = useState('');
-  const [alienStatus, setAlienStatus] = useState('');
-  const [maritalStatus, setMaritalStatus] = useState('');
-  const [otherIncome, setOtherIncome] = useState(0);
   const [dependents, setDependents] = useState(0);
   const [state, setState] = useState('');
   const [federalTaxes, setFederalTaxes] = useState(0);
   const [stateTaxes, setStateTaxes] = useState(0);
-  const [benefits, setBenefits] = useState(0);
-  const [takeHome, setTakeHome] = useState(0);
+  const [finalIncome, setFinalIncome] = useState(0);
+  const [inputIncome, setInputIncome] = useState(0);
   // useRef hook to reference the chart element 
   const chartRef = useRef(null);
   // useRef hook to reference the chart instance 
@@ -38,9 +106,9 @@ function BudgetTracker() {
       chartInstanceRef.current = new Chart(chartRef.current, {
         type: 'pie',
         data: {
-          labels: ['Income', 'Federal Taxes', 'State Taxes', 'Benefits', 'Take Home'],
+          labels: ['Income', 'Federal Taxes', 'State Taxes'],
           datasets: [{
-            data: [income, federalTaxes, stateTaxes, benefits, takeHome],
+            data: [finalIncome, federalTaxes, stateTaxes],
             backgroundColor: ['pink', 'purple', 'orange', 'yellow', 'blue']
           }]
         },
@@ -60,87 +128,144 @@ function BudgetTracker() {
           }
       });
     }
-  }, [chartRef, income, federalTaxes, stateTaxes, benefits, takeHome]);
+  }, [chartRef, income, federalTaxes, stateTaxes]);
 
-  return (
-    //I made most of these default inputs some of them def need to be fixed to dropdowns or something else but I will do that later just wanted base function of a budget tracker
-    <div className="BudgetTracker">
-      <div>
-        <label>
-          Income:
-          <input type="number" value={income} onChange={e => setIncome(Number(e.target.value))} />
-        </label>
-        <label>
-          Pay Frequency:
-          <input type="text" value={payFrequency} onChange={e => setPayFrequency(e.target.value)} />
-        </label>
-        <label>
-          Pay Type:
-          <input type="text" value={payType} onChange={e => setPayType(e.target.value)} />
-        </label>
-        <label>
-          Overtime:
-          <input type="number" value={overtime} onChange={e => setOvertime(Number(e.target.value))} />
-        </label>
-        <label>
-          Pay Date:
-          <input type="date" value={payDate} onChange={e => setPayDate(e.target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Alien Status:
-          <input type="text" value={alienStatus} onChange={e => setAlienStatus(e.target.value)} />
-        </label>
-        <label>
-          Marital Status:
-          <input type="text" value={maritalStatus} onChange={e => setMaritalStatus(e.target.value)} />
-        </label>
-        <label>
-          Other Income:
-          <input type="number" value={otherIncome} onChange={e => setOtherIncome(Number(e.target.value))} />
-        </label>
-        <label>
-          Dependents:
-          <input type="number" value={dependents} onChange={e => setDependents(Number(e.target.value))} />
-        </label>
-      </div>
-      <div>
-        <label>
-          State:
-          <input type="text" value={state} onChange={e => setState(e.target.value)} />
-        </label>
-        <label>
-          Federal Taxes:
-          <input type="number" value={federalTaxes} onChange={e => setFederalTaxes(Number(e.target.value))} />
-        </label>
-        <label>
-          State Taxes:
-          <input type="number" value={stateTaxes} onChange={e => setStateTaxes(Number(e.target.value))} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Benefits:
-          <input type="number" value={benefits} onChange={e => setBenefits(Number(e.target.value))} />
-        </label>
-        <label>
-          Take Home:
-          <input type="number" value={takeHome} onChange={e => setTakeHome(Number(e.target.value))} />
-        </label>
-      </div>
-      <canvas ref={chartRef} />
-    <div>
-      <h2>Summary</h2>
-      <p>Income: {income}</p>
-      <p>Federal Taxes: {federalTaxes}</p>
-      <p>State Taxes: {stateTaxes}</p>
-      <p>Benefits: {benefits}</p>
-      <p>Take Home: {takeHome}</p>
-      <h2>Final Amount: {income - federalTaxes - stateTaxes - benefits}</h2>
-    </div>
-    </div>
-  );
+    // Add a useEffect hook to update the state taxes whenever the income or state changes
+    useEffect(() => {
+        let adjustedIncome = income;
+        let annualIncome = 0;
+    
+        if (payType === 'salary') {
+            if (payFrequency === 'weekly') {
+                adjustedIncome = inputIncome / 52;
+                annualIncome = inputIncome;
+            } else if (payFrequency === 'biweekly') {
+                adjustedIncome = inputIncome / 26;
+                annualIncome = inputIncome;
+            }
+        } else if (payType === 'hourly') {
+            if (payFrequency === 'weekly') {
+                adjustedIncome = inputIncome * 40;
+                annualIncome = adjustedIncome * 52;
+            } else if (payFrequency === 'biweekly') {
+                adjustedIncome = inputIncome * 80;
+                annualIncome = adjustedIncome * 26;
+            }
+        }
+    
+        setIncome(adjustedIncome); // Update income state variable
+        setFinalIncome(annualIncome); // Update finalIncome state variable
+    
+        const stateData = taxData.states[state];
+        let taxRate = 0;
+        if (stateData) {
+          for (let i = 0; i < stateData.length; i++) {
+            if (i === stateData.length - 1) {
+                taxRate = stateData[i].taxRate;
+                break;
+            }
+            else if (annualIncome <= stateData[i].income) {
+              taxRate = stateData[i -1].taxRate;
+              break;
+            }
+          }
+        }
+    
+        setStateTaxes(adjustedIncome * taxRate);
+      }, [income, state, payType, payFrequency]);
+
+      useEffect(() => {
+        let adjustedIncome = income;
+        let annualIncome = 0;
+
+        if (payType === 'salary') {
+            if (payFrequency === 'weekly') {
+                adjustedIncome = inputIncome / 52;
+                annualIncome = inputIncome;
+            } else if (payFrequency === 'biweekly') {
+                adjustedIncome = inputIncome / 26;
+                annualIncome = inputIncome;
+            }
+        } else if (payType === 'hourly') {
+            if (payFrequency === 'weekly') {
+                adjustedIncome = inputIncome * 40;
+                annualIncome = adjustedIncome * 52;
+            } else if (payFrequency === 'biweekly') {
+                adjustedIncome = inputIncome * 80;
+                annualIncome = adjustedIncome * 26;
+            }
+        }
+    
+        const federalData = taxData.Federal;
+        let taxRate = 0;
+        if (federalData) {
+          for (let i = 0; i < federalData.length; i++) {
+            if (i === federalData.length - 1) {
+                taxRate = federalData[i].taxRate;
+                console.log(taxRate);
+                console.log(adjustedIncome)
+                break;
+            }
+            else if (annualIncome <= federalData[i].income) {
+              taxRate = i > 0 ? federalData[i - 1].taxRate : federalData[i].taxRate;
+              console.log(taxRate);
+              console.log(adjustedIncome)
+              break;
+            }
+          }
+        }
+    
+        setFederalTaxes(adjustedIncome * taxRate);
+    }, [income, payType, payFrequency]);
+
+
+      return (
+        <div className="BudgetTracker">
+          <div className='Earnings'>
+            <label>
+              Income:
+              <input type="number" value={inputIncome} onChange={(e) => setInputIncome(Number(e.target.value))}/>
+            </label>
+            <label>
+              Pay Frequency:
+              <Select
+                options={payFrequencyOptions}
+                value={payFrequencyOptions.find(option => option.value === payFrequency)}
+                onChange={option => setPayFrequency(option.value)}
+              />
+            </label>
+            <label>
+              Pay Type:
+              <Select
+                options={payTypeOptions}
+                value={payTypeOptions.find(option => option.value === payType)}
+                onChange={option => setPayType(option.value)}
+              />
+            </label>
+          </div>
+          <div>
+          <label>
+              State:
+              <Select
+                options={stateOptions}
+                value={stateOptions.find(option => option.value === state)}
+                onChange={option => setState(option.value)}
+              />
+            </label>
+          </div>
+          <canvas ref={chartRef} />
+        <div>
+          <h2>Summary</h2>
+          <p>Income: {income}</p>
+          <p>Federal Taxes: {federalTaxes.toFixed(2)}</p>
+          <p>State Taxes: {stateTaxes.toFixed(2)}</p>
+          <p>Pay Frequency: {payFrequency}</p>
+          <p>Pay Type: {payType}</p>
+          <p>State: {state}</p>
+          <h2>Final Amount: {income - federalTaxes - stateTaxes}</h2>
+        </div>
+        </div>
+      );
 }
 
 export default BudgetTracker;
