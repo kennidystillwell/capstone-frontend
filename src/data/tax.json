@@ -1,0 +1,281 @@
+{
+    "states": {
+      "Alabama": [
+        {"income": 0, "taxRate": 0.02},
+        {"income": 500, "taxRate": 0.04},
+        {"income": 3000, "taxRate": 0.05}
+      ],
+      "Alaska": [
+        {"income": 0, "taxRate": 0.0}
+      ],
+      "Arizona": [
+        {"income": 0, "taxRate": 0.025}
+      ],
+      "Arkansas": [
+        {"income": 0, "taxRate": 0.02},
+        {"income": 4400, "taxRate": 0.04},
+        {"income": 8800, "taxRate": 0.044}
+      ],
+      "California": [
+        {"income": 0, "taxRate": 0.01},
+        {"income": 10412, "taxRate": 0.02},
+        {"income": 24684, "taxRate": 0.04},
+        {"income": 38959, "taxRate": 0.06},
+        {"income": 54081, "taxRate": 0.08},
+        {"income": 68350, "taxRate": 0.093},
+        {"income": 349137, "taxRate": 0.103},
+        {"income": 418961, "taxRate": 0.113},
+        {"income": 698271, "taxRate": 0.123},
+        {"income": 1000000, "taxRate": 0.133}
+      ],
+      "Colorado": [
+        {"income": 0, "taxRate": 0.044}
+      ],
+      "Connecticut": [
+        {"income": 0, "taxRate": 0.02},
+        {"income": 10000, "taxRate": 0.045},
+        {"income": 50000, "taxRate": 0.055},
+        {"income": 100000, "taxRate": 0.06},
+        {"income": 200000, "taxRate": 0.065},
+        {"income": 250000, "taxRate": 0.069},
+        {"income": 500000, "taxRate": 0.0699}
+      ],
+        "Delaware": [
+        {"income": 2000, "taxRate": 0.022},
+        {"income": 5000, "taxRate": 0.039},
+        {"income": 10000, "taxRate": 0.048},
+        {"income": 20000, "taxRate": 0.052},
+        {"income": 25000, "taxRate": 0.0555},
+        {"income": 60000, "taxRate": 0.066}
+      ],
+        "Florida": [
+          {"income": 0, "taxRate": 0.0}
+      ],
+        "Georgia": [
+          {"income": 0, "taxRate": 0.0549}
+      ],
+        "Hawaii": [
+        {"income": 0, "taxRate": 0.014},
+        {"income": 2400, "taxRate": 0.032},
+        {"income": 4800, "taxRate": 0.055},
+        {"income": 9600, "taxRate": 0.064},
+        {"income": 14400, "taxRate": 0.068},
+        {"income": 19200, "taxRate": 0.072},
+        {"income": 24000, "taxRate": 0.076},
+        {"income": 36000, "taxRate": 0.079},
+        {"income": 48000, "taxRate": 0.0825},
+        {"income": 150000, "taxRate": 0.09},
+        {"income": 175000, "taxRate": 0.1},
+        {"income": 200000, "taxRate": 0.11}
+      ],
+        "Idaho": [
+        {"income": 0, "taxRate": 0.058}
+      ],
+        "Illinois": [
+        {"income": 0, "taxRate": 0.0495}
+      ],
+        "Indiana": [
+          {"income": 0, "taxRate": 0.0305}
+      ],
+        "Iowa": [
+          {"income": 0, "taxRate": 0.044},
+          {"income": 6210, "taxRate": 0.0482},
+          {"income": 31050, "taxRate": 0.057}
+      ],
+        "Kansas": [
+            {"income": 0, "taxRate": 0.031},
+            {"income": 15000, "taxRate": 0.0525},
+            {"income": 30000, "taxRate": 0.057}
+      ],
+        "Kentucky": [
+            {"income": 0, "taxRate": 0.04}
+      ],
+        "Louisiana": [
+            {"income": 0, "taxRate": 0.0185},
+            {"income": 12500, "taxRate": 0.035},
+            {"income": 50000, "taxRate": 0.0425}
+      ],
+        "Maine": [
+            {"income": 0, "taxRate": 0.058},
+            {"income": 26050, "taxRate": 0.0675},
+            {"income": 61600, "taxRate": 0.0715}
+      ],
+        "Maryland": [
+            {"income": 0, "taxRate": 0.02},
+            {"income": 1000, "taxRate": 0.03},
+            {"income": 2000, "taxRate": 0.04},
+            {"income": 3000, "taxRate": 0.0475},
+            {"income": 100000, "taxRate": 0.05},
+            {"income": 125000, "taxRate": 0.0525},
+            {"income": 150000, "taxRate": 0.055},
+            {"income": 250000, "taxRate": 0.0575}
+      ],
+        "Massachusetts": [
+          {"income": 0, "taxRate": 0.05},
+          {"income": 1000000, "taxRate": 0.09}
+      ],
+        "Michigan": [
+          {"income": 0, "taxRate": 0.0425}
+      ],
+        "Minnesota": [
+          {"income": 0, "taxRate": 0.0535},
+          {"income": 31690, "taxRate": 0.0680},
+          {"income": 104090, "taxRate": 0.0785},
+          {"income": 193240, "taxRate": 0.0985}
+      ],
+        "Mississippi": [
+          {"income": 10000, "taxRate": 0.0470}
+      ],
+        "Missouri": [
+          {"income": 1273, "taxRate": 0.02},
+          {"income": 2546, "taxRate": 0.025},
+          {"income": 3819, "taxRate": 0.03},
+          {"income": 5092, "taxRate": 0.035},
+          {"income": 6365, "taxRate": 0.04},
+          {"income": 7638, "taxRate": 0.045},
+          {"income": 8911, "taxRate": 0.048}
+      ],
+        "Montana": [
+          {"income": 0, "taxRate": 0.047},
+          {"income": 20500, "taxRate": 0.059}
+      ],
+      "Nebraska": [
+        {"income": 0, "taxRate": 0.0246},
+        {"income": 3700, "taxRate": 0.0351},
+        {"income": 22170, "taxRate": 0.0501},
+        {"income": 35730, "taxRate": 0.0584}
+    ],
+    "Nevada": [
+        {"income": 0, "taxRate": 0.0}
+    ],
+    "New Hampshire": [
+        {"income": 0, "taxRate": 0.0}
+    ],
+    "New Jersey": [
+        {"income": 0, "taxRate": 0.014},
+        {"income": 20000, "taxRate": 0.0175},
+        {"income": 35000, "taxRate": 0.035},
+        {"income": 40000, "taxRate": 0.05525},
+        {"income": 75000, "taxRate": 0.0637},
+        {"income": 500000, "taxRate": 0.0897},
+        {"income": 1000000, "taxRate": 0.1075}
+    ],
+    "New Mexico": [
+      {"income": 0, "taxRate": 0.017},
+      {"income": 5500, "taxRate": 0.032},
+      {"income": 11000, "taxRate": 0.047},
+      {"income": 16000, "taxRate": 0.049},
+      {"income": 210000, "taxRate": 0.059}
+  ],
+  "New York": [
+    {"income": 0, "taxRate": 0.04},
+    {"income": 8500, "taxRate": 0.045},
+    {"income": 11700, "taxRate": 0.0525},
+    {"income": 13900, "taxRate": 0.055},
+    {"income": 80650, "taxRate": 0.06},
+    {"income": 215400, "taxRate": 0.0685},
+    {"income": 1077550, "taxRate": 0.0965},
+    {"income": 5000000, "taxRate": 0.103},
+    {"income": 25000000, "taxRate": 0.109}
+],
+"North Carolina": [
+    {"income": 0, "taxRate": 0.045}
+],
+"North Dakota": [
+    {"income": 44725, "taxRate": 0.0195},
+    {"income": 225975, "taxRate": 0.025}
+],
+"Ohio": [
+    {"income": 26050, "taxRate": 0.0275},
+    {"income": 92150, "taxRate": 0.035}
+],
+"Oklahoma": [
+    {"income": 0, "taxRate": 0.0025},
+    {"income": 1000, "taxRate": 0.0075},
+    {"income": 2500, "taxRate": 0.0175},
+    {"income": 3750, "taxRate": 0.0275},
+    {"income": 4900, "taxRate": 0.0375},
+    {"income": 7200, "taxRate": 0.0475}
+],
+"Oregon": [
+  {"income": 0, "taxRate": 0.0475},
+  {"income": 4300, "taxRate": 0.0675},
+  {"income": 10750, "taxRate": 0.0875},
+  {"income": 125000, "taxRate": 0.099}
+],
+"Pennsylvania": [
+  {"income": 0, "taxRate": 0.0307}
+],
+"Rhode Island": [
+  {"income": 0, "taxRate": 0.0375},
+  {"income": 77450, "taxRate": 0.0475},
+  {"income": 176050, "taxRate": 0.0599}
+],
+"South Carolina": [
+  {"income": 0, "taxRate": 0.0},
+  {"income": 3460, "taxRate": 0.03},
+  {"income": 17330, "taxRate": 0.064}
+],
+"South Dakota": [
+  {"income": 0, "taxRate": 0.0}
+],
+"Tennessee": [
+  {"income": 0, "taxRate": 0.0}
+],
+"Texas": [
+  {"income": 0, "taxRate": 0.0}
+],
+"Utah": [
+  {"income": 0, "taxRate": 0.0465}
+],
+"Vermont": [
+  {"income": 0, "taxRate": 0.0335},
+  {"income": 45400, "taxRate": 0.066},
+  {"income": 110050, "taxRate": 0.076},
+  {"income": 229550, "taxRate": 0.0875}
+],
+"Virginia": [
+  {"income": 0, "taxRate": 0.02},
+  {"income": 3000, "taxRate": 0.03},
+  {"income": 5000, "taxRate": 0.05},
+  {"income": 17000, "taxRate": 0.0575}
+],
+"Washington": [
+  {"income": 0, "taxRate": 0.0}
+],
+"West Virginia": [
+  {"income": 0, "taxRate": 0.0236},
+  {"income": 10000, "taxRate": 0.0315},
+  {"income": 25000, "taxRate": 0.0354},
+  {"income": 40000, "taxRate": 0.0472},
+  {"income": 60000, "taxRate": 0.0512}
+],
+"Wisconsin": [
+  {"income": 0, "taxRate": 0.035},
+  {"income": 14320, "taxRate": 0.044},
+  {"income": 28640, "taxRate": 0.053},
+  {"income": 315310, "taxRate": 0.0765}
+],
+"Wyoming": [
+  {"income": 0, "taxRate": 0.0}
+],
+"Washington D.C.": [
+  {"income": 0, "taxRate": 0.04},
+  {"income": 10000, "taxRate": 0.06},
+  {"income": 40000, "taxRate": 0.065},
+  {"income": 60000, "taxRate": 0.085},
+  {"income": 250000, "taxRate": 0.0925},
+  {"income": 500000, "taxRate": 0.0975},
+  {"income": 1000000, "taxRate": 0.1075}
+]
+},
+"Federal": [
+  {"income": 0, "taxRate": 0.10},
+  {"income": 11001, "taxRate": 0.12},
+  {"income": 44726, "taxRate": 0.22},
+  {"income": 95376, "taxRate": 0.24},
+  {"income": 182101, "taxRate": 0.32},
+  {"income": 231251, "taxRate": 0.35},
+  {"income": 578126, "taxRate": 0.37}
+]
+}
