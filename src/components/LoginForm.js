@@ -12,16 +12,16 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.get('/login', {
+      const response = await axios.get('http://localhost:5000/login', {
         params: { email, password },
       });
 
       if (response.status === 200) {
-        //login successful
+        // Login successful
         console.log(response.data);
         setError('');
       } else {
-        //login failed
+        // Login failed
         setError('Invalid email or password');
       }
     } catch (error) {
