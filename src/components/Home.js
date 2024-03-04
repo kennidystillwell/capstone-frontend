@@ -1,6 +1,5 @@
 import React from 'react';
 import HomeNav from './HomeNav';
-import FactCarousel from './FactCarousel';
 import '../css/Home.css';
 import banner from '../images/banner.webp';
 
@@ -23,9 +22,6 @@ const Home = () => {
         </div>
       </div>
       <div className="custom-row">
-        <div className="carousel-container">
-          <FactCarousel />
-        </div>
       </div>
     </div>
   );

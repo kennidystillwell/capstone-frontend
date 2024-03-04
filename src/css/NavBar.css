@@ -9,9 +9,15 @@
   
 .nav-wrapper ul {
     margin-right: 15px;
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end;
 }
   
 .nav-wrapper ul li {
     margin: 0 10px;
 }
-  
+
+div.nav-wrapper.container {
+    align-items: center;
+}
