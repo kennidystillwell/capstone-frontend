@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 import "materialize-css/dist/css/materialize.min.css";
 import '../css/NavBar.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef(null);
+  const { user, logout } = useAuth(); //access user state and logout function from AuthContext
 
   const toggleNav = () => {
     setIsOpen(!isOpen);
@@ -47,18 +49,30 @@ const Navbar = () => {
                 Resources
               </Link>
             </li>
-            <li>
-              <Link to="/login" onClick={handleLinkClick}>
-                Login
-              </Link>
-            </li>
+            {user ? ( //conditionally render based on user authentication status
+              <>
+                <li>
+                  <span>Welcome, {user.firstName} {user.lastName}</span>
+                </li>
+                <li>
+                  <button onClick={logout}>Logout</button>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link to="/login" onClick={handleLinkClick}>
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
           <ul
             id="nav-mobile"
             className={`sidenav ${isOpen ? "open" : ""}`}
             style={{
               transform: isOpen ? "translateX(0%)" : "translateX(-105%)",
-            }}>
+            }}
+          >
             <li>
               <Link to="/budget-tracker" onClick={handleLinkClick}>
                 Budget Tracker
@@ -69,17 +83,29 @@ const Navbar = () => {
                 Resources
               </Link>
             </li>
-            <li>
-              <Link to="/login" onClick={handleLinkClick}>
-                Login
-              </Link>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <span>Welcome, {user.firstName} {user.lastName}</span>
+                </li>
+                <li>
+                  <button onClick={logout}>Logout</button>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link to="/login" onClick={handleLinkClick}>
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
           <a
             href="#"
             data-target="nav-mobile"
             className="sidenav-trigger"
-            onClick={toggleNav}>
+            onClick={toggleNav}
+          >
             <i className="material-icons">menu</i>
           </a>
         </div>
