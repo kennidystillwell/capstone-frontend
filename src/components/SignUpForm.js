@@ -54,8 +54,8 @@ const SignUpForm = () => {
               className="validate"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First Name"
             />
-            <label htmlFor="first_name">First Name</label>
           </div>
           <div className="input-field">
             <input
@@ -64,8 +64,8 @@ const SignUpForm = () => {
               className="validate"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last Name"
             />
-            <label htmlFor="last_name">Last Name</label>
           </div>
           <div className="input-field">
             <input
@@ -74,8 +74,8 @@ const SignUpForm = () => {
               className="validate"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
             />
-            <label htmlFor="email">Email</label>
           </div>
           <div className="input-field">
             <input
@@ -84,8 +84,8 @@ const SignUpForm = () => {
               className="validate"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              placeholder="Phone Number"
             />
-            <label htmlFor="phone">Phone Number</label>
           </div>
           <div className="input-field password-input">
             <input
@@ -94,8 +94,8 @@ const SignUpForm = () => {
               className="validate"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
             />
-            <label htmlFor="password">Password</label>
             <button
               type="button"
               className="btn-toggle-password"
@@ -111,8 +111,8 @@ const SignUpForm = () => {
               className="validate"
               value={securityQuestion}
               onChange={(e) => setSecurityQuestion(e.target.value)}
+              placeholder="Security Question: What is your mother's maiden name?"
             />
-            <label htmlFor="security_question">Security Question: What is your mother's maiden name?</label>
           </div>
           {error && <p className="error">{error}</p>}
           <button className="btn waves-effect waves-light" type="submit">Sign Up</button>

@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/loginForm.css';
+import { useAuth } from './AuthContext';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  const { login, user } = useAuth(); //access the login function/user state from the AuthContext
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,11 +22,14 @@ const LoginForm = () => {
       });
 
       if (response.status === 200) {
-        // Login successful
-        console.log(response.data);
+        //login successful
+        console.log('User before login:', user); //log user state before login (troubleshooting)
+        login(response.data); //update user state using login function
+        console.log('User after login:', user); //log user state after login (troubleshooting)
         setError('');
+        setIsLoggedIn(true); //update login status
       } else {
-        // Login failed
+        //login failed
         setError('Invalid email or password');
       }
     } catch (error) {
@@ -32,40 +40,53 @@ const LoginForm = () => {
 
   return (
     <div>
-      <div className="login-container">
-        <h4>Login</h4>
-        <form onSubmit={handleSubmit}>
-          <div className="input-field">
-            <input
-              id="email"
-              type="email"
-              className="validate"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label htmlFor="email">Email</label>
+      {!isLoggedIn ? ( //render login form if not logged in
+        <div className="login-container">
+          <h4>Login</h4>
+          <form onSubmit={handleSubmit}>
+            <div className="input-field">
+              <input
+                id="email"
+                type="email"
+                className="validate"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
+            </div>
+            <div className="input-field password-input">
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                className="validate"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+              <button
+                type="button"
+                className="btn-toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
+            {error && <p className="error">{error}</p>}
+            <button className="btn waves-effect waves-light" type="submit">
+              Login
+            </button>
+          </form>
+          <div style={{ marginTop: '20px' }}>
+            <Link to="/signup" className="waves-effect waves-light btn">
+              Create an Account
+            </Link>
           </div>
-          <div className="input-field">
-            <input
-              id="password"
-              type="password"
-              className="validate"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label htmlFor="password">Password</label>
-          </div>
-          {error && <p className="error">{error}</p>}
-          <button className="btn waves-effect waves-light" type="submit">
-            Login
-          </button>
-        </form>
-        <div style={{ marginTop: '20px' }}>
-          <Link to="/signup" className="waves-effect waves-light btn">
-            Create an Account
-          </Link>
         </div>
-      </div>
+      ) : ( //render welcome message if logged in
+        <div className="welcome-message">
+          <h4>Welcome!</h4>
+        </div>
+      )}
     </div>
   );
 };
