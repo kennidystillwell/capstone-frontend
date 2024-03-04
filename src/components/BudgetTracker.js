@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, PieController, ArcElement, CategoryScale, Title, Legend } from 'chart.js';
 import taxData from '../data/tax.json';
-// Used for the dropdowns!!
 import Select from 'react-select';
-import '../css/Tracker.css';
-
+import { Tab, Tabs } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
 // Have to register stuff I want to use for Chart.js here and in the import above!
@@ -77,12 +76,6 @@ const payFrequencyOptions = [
 
 // BudgetTracker component
 function BudgetTracker() {
-  // Defining state variables using React's useState hook and setting their initial values to 0 or an empty string this will allow us to update them live >:3
-  //Things deleted from the original code: alienStatus, maritalStatus, otherIncome, payDate, takehome, overtime, and benefits 
-  //Many of these can be readded if needed but for now I will leave them out
-  //may add option for user to state how many hours they work a week and then calculate the income based on that
-  //Create goal for user to set and then calculate how much they need to save to reach that goal
-  //Way for user to add expenses?!?!?! food, bills... etc
   const [income, setIncome] = useState(0);
   const [payFrequency, setPayFrequency] = useState('');
   const [payType, setPayType] = useState('');
@@ -91,11 +84,39 @@ function BudgetTracker() {
   const [stateTaxes, setStateTaxes] = useState(0);
   const [finalIncome, setFinalIncome] = useState(0);
   const [inputIncome, setInputIncome] = useState(0);
+  const [food, setFood] = useState(0);
+  const [rent, setRent] = useState(0);
+  const [car, setCar] = useState(0);
+  const [phone, setPhone] = useState(0);
+  const [internet, setInternet] = useState(0);
+  const [gas, setGas] = useState(0);
+  const [other, setOther] = useState(0);
+  const [budgetStartDate, setBudgetStartDate] = useState('');
+  const [payDateEndDate, setPayDateEndDate] = useState('');
+  const [goal, setGoal] = useState({
+    name: '',
+    frequency: '',
+    amount: 0,
+    total: 0,
+  });
+  const [expenses, setExpenses] = useState(0);
+  const [remainingIncome, setRemainingIncome] = useState(0);
+
   const navigate = useNavigate();
   // useRef hook to reference the chart element 
   const chartRef = useRef(null);
   // useRef hook to reference the chart instance 
   const chartInstanceRef = useRef(null);
+
+  //Calculate the total expenses
+  useEffect(() => {
+    setExpenses(Number(food) + Number(rent) + Number(car) + Number(phone) + Number(internet) + Number(gas) + Number(other));
+  }, [food, rent, car, phone, internet, gas, other]);
+
+  useEffect(() => {
+    setRemainingIncome(finalIncome - expenses - federalTaxes - stateTaxes);
+  }, [finalIncome, expenses, federalTaxes, stateTaxes]);
+
 
   // Using React's useEffect hook to update the chart when state variables change 
   useEffect(() => {
@@ -108,9 +129,9 @@ function BudgetTracker() {
       chartInstanceRef.current = new Chart(chartRef.current, {
         type: 'pie',
         data: {
-          labels: ['Income', 'Federal Taxes', 'State Taxes'],
+          labels: ['Income', 'Federal Taxes', 'State Taxes', 'Expenses'],
           datasets: [{
-            data: [finalIncome, federalTaxes, stateTaxes],
+            data: [finalIncome, federalTaxes, stateTaxes, expenses],
             backgroundColor: ['pink', 'purple', 'orange', 'yellow', 'blue']
           }]
         },
@@ -130,137 +151,190 @@ function BudgetTracker() {
           }
       });
     }
-  }, [chartRef, income, federalTaxes, stateTaxes]);
+  }, [chartRef, income, federalTaxes, stateTaxes, expenses, finalIncome]);
 
-    // Add a useEffect hook to update the state taxes whenever the income or state changes
-    useEffect(() => {
-        let adjustedIncome = income;
-        let annualIncome = 0;
-    
-        if (payType === 'salary') {
-            if (payFrequency === 'weekly') {
-                adjustedIncome = inputIncome / 52;
-                annualIncome = inputIncome;
-            } else if (payFrequency === 'biweekly') {
-                adjustedIncome = inputIncome / 26;
-                annualIncome = inputIncome;
-            }
-        } else if (payType === 'hourly') {
-            if (payFrequency === 'weekly') {
-                adjustedIncome = inputIncome * 40;
-                annualIncome = adjustedIncome * 52;
-            } else if (payFrequency === 'biweekly') {
-                adjustedIncome = inputIncome * 80;
-                annualIncome = adjustedIncome * 26;
-            }
+  useEffect(() => {
+    let adjustedIncome = income;
+    let annualIncome = 0;
+
+    if (payType === 'salary') {
+        if (payFrequency === 'weekly') {
+            adjustedIncome = inputIncome / 52;
+            annualIncome = inputIncome;
+        } else if (payFrequency === 'biweekly') {
+            adjustedIncome = inputIncome / 26;
+            annualIncome = inputIncome;
         }
-    
-        setIncome(adjustedIncome); // Update income state variable
-        setFinalIncome(annualIncome); // Update finalIncome state variable
-    
-        const stateData = taxData.states[state];
-        let taxRate = 0;
-        if (stateData) {
-          for (let i = 0; i < stateData.length; i++) {
+    } else if (payType === 'hourly') {
+        if (payFrequency === 'weekly') {
+            adjustedIncome = inputIncome * 40;
+            annualIncome = adjustedIncome * 52;
+        } else if (payFrequency === 'biweekly') {
+            adjustedIncome = inputIncome * 80;
+            annualIncome = adjustedIncome * 26;
+        }
+    }
+
+    setIncome(adjustedIncome); // Update income state variable
+    setFinalIncome(adjustedIncome);
+
+    const stateData = taxData.states[state];
+    let taxRate = 0;
+    if (stateData) {
+        for (let i = 0; i < stateData.length; i++) {
             if (i === stateData.length - 1) {
                 taxRate = stateData[i].taxRate;
                 break;
-            }
-            else if (annualIncome <= stateData[i].income) {
-              taxRate = stateData[i -1].taxRate;
-              break;
-            }
-          }
-        }
-    
-        setStateTaxes(adjustedIncome * taxRate);
-      }, [income, state, payType, payFrequency]);
-
-      useEffect(() => {
-        let adjustedIncome = income;
-        let annualIncome = 0;
-
-        if (payType === 'salary') {
-            if (payFrequency === 'weekly') {
-                adjustedIncome = inputIncome / 52;
-                annualIncome = inputIncome;
-            } else if (payFrequency === 'biweekly') {
-                adjustedIncome = inputIncome / 26;
-                annualIncome = inputIncome;
-            }
-        } else if (payType === 'hourly') {
-            if (payFrequency === 'weekly') {
-                adjustedIncome = inputIncome * 40;
-                annualIncome = adjustedIncome * 52;
-            } else if (payFrequency === 'biweekly') {
-                adjustedIncome = inputIncome * 80;
-                annualIncome = adjustedIncome * 26;
-            }
-        }
-    
-        const federalData = taxData.Federal;
-        let taxRate = 0;
-        if (federalData) {
-          for (let i = 0; i < federalData.length; i++) {
-            if (i === federalData.length - 1) {
-                taxRate = federalData[i].taxRate;
-                console.log(taxRate);
-                console.log(adjustedIncome)
+            } else if (annualIncome <= stateData[i].income) {
+                taxRate = stateData[i - 1].taxRate;
                 break;
             }
-            else if (annualIncome <= federalData[i].income) {
-              taxRate = i > 0 ? federalData[i - 1].taxRate : federalData[i].taxRate;
-              console.log(taxRate);
-              console.log(adjustedIncome)
-              break;
-            }
-          }
         }
-    
-        setFederalTaxes(adjustedIncome * taxRate);
-    }, [income, payType, payFrequency]);
+    }
 
+    setStateTaxes(adjustedIncome * taxRate);
+}, [income, state, payType, payFrequency]);
 
-      return (
-        <div className="BudgetTracker">
-          <div className='Earnings'>
-            <label>
-              Income:
-              <input type="number" value={inputIncome} onChange={(e) => setInputIncome(Number(e.target.value))}/>
-            </label>
-            <label>
-              Pay Frequency:
-              <Select
-                options={payFrequencyOptions}
-                value={payFrequencyOptions.find(option => option.value === payFrequency)}
-                onChange={option => setPayFrequency(option.value)}
-              />
-            </label>
-            <label>
-              Pay Type:
-              <Select
-                options={payTypeOptions}
-                value={payTypeOptions.find(option => option.value === payType)}
-                onChange={option => setPayType(option.value)}
-              />
-            </label>
-          </div>
-          <div>
-          <label>
-              State:
-              <Select
-                options={stateOptions}
-                value={stateOptions.find(option => option.value === state)}
-                onChange={option => setState(option.value)}
-              />
-            </label>
-          </div>
-          <canvas ref={chartRef} />
-          <button onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state } })}>
-  Go to Summary
-</button>
-        </div>
-      );
+useEffect(() => {
+    let adjustedIncome = income;
+    let annualIncome = 0;
+
+    if (payType === 'salary') {
+        if (payFrequency === 'weekly') {
+            adjustedIncome = inputIncome / 52;
+            annualIncome = inputIncome;
+        } else if (payFrequency === 'biweekly') {
+            adjustedIncome = inputIncome / 26;
+            annualIncome = inputIncome;
+        }
+    } else if (payType === 'hourly') {
+        if (payFrequency === 'weekly') {
+            adjustedIncome = inputIncome * 40;
+            annualIncome = adjustedIncome * 52;
+        } else if (payFrequency === 'biweekly') {
+            adjustedIncome = inputIncome * 80;
+            annualIncome = adjustedIncome * 26;
+        }
+    }
+
+    const federalData = taxData.Federal;
+    let taxRate = 0;
+    if (federalData) {
+        for (let i = 0; i < federalData.length; i++) {
+            if (i === federalData.length - 1) {
+                taxRate = federalData[i].taxRate;
+                
+                break;
+            } else if (annualIncome <= federalData[i].income) {
+                taxRate = i > 0 ? federalData[i - 1].taxRate : federalData[i].taxRate;
+                
+                break;
+            }
+        }
+    }
+
+    setFederalTaxes(adjustedIncome * taxRate);
+}, [income, payType, payFrequency]);
+
+return (
+  <div className="tracker">
+            <div className="form-tracker">
+    <Tabs defaultActiveKey="income" className="flex-grow-1">
+      <Tab eventKey="income" title="Income">
+      <label>
+        Income:
+        <input type="number" value={inputIncome} onChange={(e) => setInputIncome(Number(e.target.value))} />
+      </label>
+      <label>
+        Pay Frequency:
+        <Select
+          options={payFrequencyOptions}
+          value={payFrequencyOptions.find(option => option.value === payFrequency)}
+          onChange={option => setPayFrequency(option.value)}
+        />
+      </label>
+      <label>
+        Pay Type:
+        <Select
+          options={payTypeOptions}
+          value={payTypeOptions.find(option => option.value === payType)}
+          onChange={option => setPayType(option.value)}
+        />
+      </label>
+    <label>
+      State:
+      <Select
+        options={stateOptions}
+        value={stateOptions.find(option => option.value === state)}
+        onChange={option => setState(option.value)}
+      />
+    </label>
+      <label>
+      Budget Start Date:
+      <input type="date" value={budgetStartDate} onChange={e => setBudgetStartDate(e.target.value)} />
+    </label>
+    <label>
+      Pay Date End Date:
+      <input type="date" value={payDateEndDate} onChange={e => setPayDateEndDate(e.target.value)} />
+    </label>
+    </Tab>
+
+    <Tab eventKey="expenses" title="Expenses">
+      <label>
+        Food:
+        <input type="number" value={food} onChange={e => setFood(e.target.value)} />
+      </label>
+      <label>
+        Rent:
+        <input type="number" value={rent} onChange={e => setRent(e.target.value)} />
+      </label>
+      <label>
+        Car:
+        <input type="number" value={car} onChange={e => setCar(e.target.value)} />
+      </label>
+      <label>
+        Phone:
+        <input type="number" value={phone} onChange={e => setPhone(e.target.value)} />
+      </label>
+      <label>
+        Internet:
+        <input type="number" value={internet} onChange={e => setInternet(e.target.value)} />
+      </label>
+      <label>
+        Gas:
+        <input type="number" value={gas} onChange={e => setGas(e.target.value)} />
+      </label>
+      <label>
+        Other:
+        <input type="number" value={other} onChange={e => setOther(e.target.value)} />
+      </label>
+      </Tab>
+      <Tab eventKey="goal" title="Goal">
+    <label>
+      Goal Name:
+      <input type="text" value={goal.name} onChange={e => setGoal(prevGoal => ({ ...prevGoal, name: e.target.value }))} />
+    </label>
+    <label>
+      Goal Frequency:
+      <input type="text" value={goal.frequency} onChange={e => setGoal(prevGoal => ({ ...prevGoal, frequency: e.target.value }))} />
+    </label>
+    <label>
+      Goal Contribution Amount:
+      <input type="number" value={goal.amount} onChange={e => setGoal(prevGoal => ({ ...prevGoal, amount: e.target.value }))} />
+    </label>
+    <label>
+      Goal Total Amount:
+      <input type="number" value={goal.total} onChange={e => setGoal(prevGoal => ({ ...prevGoal, total: e.target.value }))} />
+    </label>
+    </Tab>
+    </Tabs>
+    <div className="chart-tracker">
+    <canvas ref={chartRef} />
+  </div>
+    <button className="summary-button" onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses } })}> Go to Summary </button>
+  </div>
+  </div>
+);
 }
 
 export default BudgetTracker;
