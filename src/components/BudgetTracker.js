@@ -238,101 +238,102 @@ useEffect(() => {
 
 return (
   <div className="tracker">
-            <div className="form-tracker">
-    <Tabs defaultActiveKey="income" className="flex-grow-1">
-      <Tab eventKey="income" title="Income">
-      <label>
-        Income:
-        <input type="number" value={inputIncome} onChange={(e) => setInputIncome(Number(e.target.value))} />
-      </label>
-      <label>
-        Pay Frequency:
-        <Select
-          options={payFrequencyOptions}
-          value={payFrequencyOptions.find(option => option.value === payFrequency)}
-          onChange={option => setPayFrequency(option.value)}
-        />
-      </label>
-      <label>
-        Pay Type:
-        <Select
-          options={payTypeOptions}
-          value={payTypeOptions.find(option => option.value === payType)}
-          onChange={option => setPayType(option.value)}
-        />
-      </label>
-    <label>
-      State:
-      <Select
-        options={stateOptions}
-        value={stateOptions.find(option => option.value === state)}
-        onChange={option => setState(option.value)}
-      />
-    </label>
-      <label>
-      Budget Start Date:
-      <input type="date" value={budgetStartDate} onChange={e => setBudgetStartDate(e.target.value)} />
-    </label>
-    <label>
-      Pay Date End Date:
-      <input type="date" value={payDateEndDate} onChange={e => setPayDateEndDate(e.target.value)} />
-    </label>
-    </Tab>
+    <div className="form-tracker">
+      <Tabs defaultActiveKey="income" className="flex-grow-1 tabs">
+        <Tab eventKey="income" title="Income">
+          <label>
+            Income:
+            <input type="number" value={inputIncome} onChange={(e) => setInputIncome(Number(e.target.value))} />
+          </label>
+          <label>
+            Pay Frequency:
+            <Select
+              options={payFrequencyOptions}
+              value={payFrequencyOptions.find(option => option.value === payFrequency)}
+              onChange={option => setPayFrequency(option.value)}
+            />
+          </label>
+          <label>
+            Pay Type:
+            <Select
+              options={payTypeOptions}
+              value={payTypeOptions.find(option => option.value === payType)}
+              onChange={option => setPayType(option.value)}
+            />
+          </label>
+          <label>
+            State:
+            <Select
+              options={stateOptions}
+              value={stateOptions.find(option => option.value === state)}
+              onChange={option => setState(option.value)}
+            />
+          </label>
+          <label>
+            Budget Start Date:
+            <input type="date" value={budgetStartDate} onChange={e => setBudgetStartDate(e.target.value)} />
+          </label>
+          <label>
+            Pay Date End Date:
+            <input type="date" value={payDateEndDate} onChange={e => setPayDateEndDate(e.target.value)} />
+          </label>
+        </Tab>
 
-    <Tab eventKey="expenses" title="Expenses">
-      <label>
-        Food:
-        <input type="number" value={food} onChange={e => setFood(e.target.value)} />
-      </label>
-      <label>
-        Rent:
-        <input type="number" value={rent} onChange={e => setRent(e.target.value)} />
-      </label>
-      <label>
-        Car:
-        <input type="number" value={car} onChange={e => setCar(e.target.value)} />
-      </label>
-      <label>
-        Phone:
-        <input type="number" value={phone} onChange={e => setPhone(e.target.value)} />
-      </label>
-      <label>
-        Internet:
-        <input type="number" value={internet} onChange={e => setInternet(e.target.value)} />
-      </label>
-      <label>
-        Gas:
-        <input type="number" value={gas} onChange={e => setGas(e.target.value)} />
-      </label>
-      <label>
-        Other:
-        <input type="number" value={other} onChange={e => setOther(e.target.value)} />
-      </label>
-      </Tab>
-      <Tab eventKey="goal" title="Goal">
-    <label>
-      Goal Name:
-      <input type="text" value={goal.name} onChange={e => setGoal(prevGoal => ({ ...prevGoal, name: e.target.value }))} />
-    </label>
-    <label>
-      Goal Frequency:
-      <input type="text" value={goal.frequency} onChange={e => setGoal(prevGoal => ({ ...prevGoal, frequency: e.target.value }))} />
-    </label>
-    <label>
-      Goal Contribution Amount:
-      <input type="number" value={goal.amount} onChange={e => setGoal(prevGoal => ({ ...prevGoal, amount: e.target.value }))} />
-    </label>
-    <label>
-      Goal Total Amount:
-      <input type="number" value={goal.total} onChange={e => setGoal(prevGoal => ({ ...prevGoal, total: e.target.value }))} />
-    </label>
-    </Tab>
-    </Tabs>
+        <Tab eventKey="expenses" title="Expenses">
+          <label>
+            Food:
+            <input type="number" value={food} onChange={e => setFood(e.target.value)} />
+          </label>
+          <label>
+            Rent:
+            <input type="number" value={rent} onChange={e => setRent(e.target.value)} />
+          </label>
+          <label>
+            Car:
+            <input type="number" value={car} onChange={e => setCar(e.target.value)} />
+          </label>
+          <label>
+            Phone:
+            <input type="number" value={phone} onChange={e => setPhone(e.target.value)} />
+          </label>
+          <label>
+            Internet:
+            <input type="number" value={internet} onChange={e => setInternet(e.target.value)} />
+          </label>
+          <label>
+            Gas:
+            <input type="number" value={gas} onChange={e => setGas(e.target.value)} />
+          </label>
+          <label>
+            Other:
+            <input type="number" value={other} onChange={e => setOther(e.target.value)} />
+          </label>
+        </Tab>
+
+        <Tab eventKey="goal" title="Goal">
+          <label>
+            Goal Name:
+            <input type="text" value={goal.name} onChange={e => setGoal(prevGoal => ({ ...prevGoal, name: e.target.value }))} />
+          </label>
+          <label>
+            Goal Frequency:
+            <input type="text" value={goal.frequency} onChange={e => setGoal(prevGoal => ({ ...prevGoal, frequency: e.target.value }))} />
+          </label>
+          <label>
+            Goal Contribution Amount:
+            <input type="number" value={goal.amount} onChange={e => setGoal(prevGoal => ({ ...prevGoal, amount: e.target.value }))} />
+          </label>
+          <label>
+            Goal Total Amount:
+            <input type="number" value={goal.total} onChange={e => setGoal(prevGoal => ({ ...prevGoal, total: e.target.value }))} />
+          </label>
+        </Tab>
+      </Tabs>
+      <button className="summary-button" onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses } })}> Go to Summary </button>
+    </div>
     <div className="chart-tracker">
-    <canvas ref={chartRef} />
-  </div>
-    <button className="summary-button" onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses } })}> Go to Summary </button>
-  </div>
+      <canvas ref={chartRef} />
+    </div>
   </div>
 );
 }
