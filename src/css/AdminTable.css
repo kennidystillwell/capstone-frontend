@@ -1,0 +1,52 @@
+.table-container {
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+td {
+    font-size: 14px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #cee9cc;
+}
+
+tbody tr:hover {
+    background-color: #e6e6e6;
+}
+
+.welcomeText {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: Tahoma, sans-serif;
+}

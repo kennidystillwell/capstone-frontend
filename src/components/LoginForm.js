@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/loginForm.css';
 import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -10,7 +11,8 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  const navigate = useNavigate();
+
   const { login, user } = useAuth(); //access the login function/user state from the AuthContext
 
   const handleSubmit = async (e) => {
@@ -20,8 +22,9 @@ const LoginForm = () => {
       const response = await axios.get('http://localhost:5000/login', {
         params: { email, password },
       });
-
-      if (response.status === 200) {
+      if (response.data.redirect === '/admin') {
+        navigate(response.data.redirect, { state: { welcome: response.data.message } })
+      } else if (response.status === 200) {
         //login successful
         console.log('User before login:', user); //log user state before login (troubleshooting)
         login(response.data); //update user state using login function

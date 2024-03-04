@@ -8,6 +8,7 @@ import Resources from './Resources';
 import Login from './Login';
 import SignUp from './SignUp';
 import SummaryPage from './Summary';
+import Admin from './Admin';
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
             <Route path='/budget-tracker' element={<BudgetTracker />} />
             <Route path='/resources' element={<Resources />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/signup' element= {<SignUp />} />
-            <Route path='/summary' element={<SummaryPage />} />  
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/summary' element={<SummaryPage />} />
+            <Route path='/admin' element={<Admin />} />
           </Routes>
         </div>
       </AuthProvider>
