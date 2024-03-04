@@ -1,14 +1,13 @@
 import React from 'react';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import ResourceEvents from './components/ResourceEvents';
 
 const Resources = () => {
     return (
         <div>
             <NavBar />
-            <div className="container">
-                <h1>Welcome to the Resources!</h1>
-            </div>
+            <ResourceEvents />
             <Footer />
         </div>
     );

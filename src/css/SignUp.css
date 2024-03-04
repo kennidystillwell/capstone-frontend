@@ -1,7 +1,7 @@
 .sign-up-container {
     text-align: center;
     margin: 50px auto;
-    width: 50%;
+    max-width: 600px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -33,3 +33,26 @@
     transform: translateY(-50%);
   }
   
+
+  @media (max-width: 575px) {
+    .sign-up-container {
+      max-width: 95%;
+    }
+  }
+  
+  @media (max-width: 400px) {
+      .sign-up-container {
+          max-width: 100%;
+      }
+      
+      .btn {
+          width: 90%;
+          margin: 0 auto;
+      }
+  }
+  
+  @media (min-width: 576px) and (max-width: 992px) {
+    .sign-up-container {
+      max-width: 70%; 
+    }
+  }
