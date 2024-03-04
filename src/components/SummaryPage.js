@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 
 function SummaryPage() {
   const location = useLocation();
-  const { income = 0, federalTaxes = 0, stateTaxes = 0, payFrequency = '', payType = '', state = '' } = location.state;
-  const finalAmount = (income - federalTaxes - stateTaxes).toFixed(2);
+  const { income = 0, federalTaxes = 0, stateTaxes = 0, payFrequency = '', payType = '', state = '', expenses = 0 } = location.state;
+  const finalAmount = (income - federalTaxes - stateTaxes - expenses).toFixed(2);
 
-  console.log('Props received by SummaryPage:', { income, federalTaxes, stateTaxes, payFrequency, payType, state });
+  console.log('Props received by SummaryPage:', { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses });
 
   return (
     <div>
@@ -17,6 +17,7 @@ function SummaryPage() {
       <p>Pay Frequency: {payFrequency}</p>
       <p>Pay Type: {payType}</p>
       <p>State: {state}</p>
+      <p>Expenses: {expenses}</p>
       <h2>Final Amount: {finalAmount}</h2>
     </div>
   );
