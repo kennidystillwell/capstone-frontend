@@ -22,3 +22,25 @@
     margin: 0 auto;
 }
 
+@media (max-width: 575px) {
+  .login-container {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 400px) {
+    .login-container {
+        max-width: 100%;
+    }
+    
+    .btn {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .login-container {
+    max-width: 70%; 
+  }
+}
