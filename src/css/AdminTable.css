@@ -41,10 +41,10 @@ tbody tr:hover {
 }
 
 .welcomeText {
+    margin-top: 20px;
     font-size: 18px;
     color: #333;
     text-align: center;
-    margin: 0;
     width: 100%;
     display: flex;
     justify-content: center;
