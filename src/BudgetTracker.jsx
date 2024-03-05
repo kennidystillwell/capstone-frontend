@@ -10,6 +10,7 @@ const BudgetTracker = () => {
             <NavBar />
                 
             <Tracker /> 
+            <Footer />
         </div>
     );
 };

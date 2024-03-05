@@ -115,6 +115,8 @@ function BudgetTracker() {
 
   useEffect(() => {
     setRemainingIncome(finalIncome - expenses - federalTaxes - stateTaxes);
+    console.log('Remaining Income:', remainingIncome)
+    console.log('Final Income:', finalIncome)
   }, [finalIncome, expenses, federalTaxes, stateTaxes]);
 
 
@@ -131,7 +133,7 @@ function BudgetTracker() {
         data: {
           labels: ['Income', 'Federal Taxes', 'State Taxes', 'Expenses'],
           datasets: [{
-            data: [finalIncome, federalTaxes, stateTaxes, expenses],
+            data: [remainingIncome, federalTaxes, stateTaxes, expenses],
             backgroundColor: ['pink', 'purple', 'orange', 'yellow', 'blue']
           }]
         },
@@ -151,7 +153,7 @@ function BudgetTracker() {
           }
       });
     }
-  }, [chartRef, income, federalTaxes, stateTaxes, expenses, finalIncome]);
+  }, [chartRef, remainingIncome, federalTaxes, stateTaxes, expenses, finalIncome]);
 
   useEffect(() => {
     let adjustedIncome = income;
@@ -329,7 +331,7 @@ return (
           </label>
         </Tab>
       </Tabs>
-      <button className="summary-button" onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses } })}> Go to Summary </button>
+      <button className="summary-button" onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses, remainingIncome } })}> Go to Summary </button>
     </div>
     <div className="chart-tracker">
       <canvas ref={chartRef} />

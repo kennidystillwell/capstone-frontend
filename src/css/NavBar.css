@@ -1,12 +1,25 @@
-.nav-wrapper ul {
-    margin-right: 15px;
+.nav-wrapper {
     display: flex;
     align-items: center;
 }
-
-.nav-wrapper ul li {
-    margin: 0 10px;
+  
+.brand-logo {
+    margin-right: auto;
+    text-decoration: none;
 }
+  
+.right {
+    margin-left: auto;
+}
+
+.nav-wrapper .right.hide-on-med-and-down li a,
+#nav-mobile li a {
+  text-decoration: none;
+}
+
+.nav-wrapper.container .sidenav-trigger {
+    text-decoration: none;
+  }
 
 .dropdown-content {
     display: none;
@@ -19,6 +32,7 @@
 
 .dropdown-content.show {
     display: block;
+    
 }
 
 .dropdown-content.show li {
@@ -26,11 +40,13 @@
     margin: 10px 0;
 }
 
-div.nav-wrapper.container {
-    align-items: flex-start;
-}
-
 .nav-wrapper ul.show {
     flex-direction: column;
     align-items: flex-start;
+}
+
+@media (max-width: 361px) {
+    .brand-logo {
+        font-size: 5px;
+    }
 }

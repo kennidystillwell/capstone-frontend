@@ -21,3 +21,7 @@
     color: white;
     font-size: 14px;
 }
+
+.container .row .col.s12 .card-panel.green.lighten-1.smaller-card a {
+    text-decoration: none;
+  }
