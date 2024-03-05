@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/SignUp.css';
-
+import axios
+  from 'axios';
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState('');
@@ -14,27 +15,22 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(firstName, lastName, email)
     try {
-      const response = await fetch('http://localhost:5000/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
-          email,
-          phoneNum: phone,
-          password,
-          securityQuestion1: securityQuestion,
-          answerSecQues1: '',
-        }),
+
+      const response = await axios.post('http://localhost:5000/signup', {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phoneNum: phone,
+        password,
+        answerSecuQuest1: securityQuestion
       });
-      const data = await response.json();
-      if (response.ok) {
-        console.log(data.message);
+
+      if (response.status === 200) {
+        console.log(response.data.message);
       } else {
-        setError(data.error);
+        setError(response.data.error);
       }
     } catch (error) {
       console.error('Error:', error);
