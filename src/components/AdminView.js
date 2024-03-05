@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react';
 import '../css/AdminTable.css'
+import '../css/UpdateUser.css'
 
 export default function AdminView({ welcome }) {
     const [data, setData] = useState([]);
@@ -28,8 +29,7 @@ export default function AdminView({ welcome }) {
         try {
             const response = await axios.put('http://localhost:5000/update', updatedUserData)
             if (response.status === 200) {
-                setData(prevData => prevData.map(user => user.id === updatedUserData.id ? updatedUserData : user));
-                setSelectUser(null);
+                setData(prevData => prevData.map(user => user.user_id === updatedUserData.user_id ? updatedUserData : user));
                 setSelectUser(null);
             }
 
@@ -41,6 +41,7 @@ export default function AdminView({ welcome }) {
     return (
 
         <div>
+            {selectUser && <div className="overlay" onClick={() => setSelectUser(null)}></div>}
             {error ? (
                 <p>Error: {error}</p>
             ) : (
@@ -50,28 +51,26 @@ export default function AdminView({ welcome }) {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>User ID</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
                                     <th>Password</th>
                                     <th>Phone Number</th>
-                                    <th>Security Question 1</th>
-                                    <th>Answer to Security Question 1</th>
+                                    <th>Answer to Security Question</th>
                                     <th>Admin</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {data.map(user => (
-                                    <tr key={user.id} onClick={() => handleUserClicked(user)}>
-                                        <td>{user.id}</td>
+                                    <tr key={user.user_id} onClick={() => handleUserClicked(user)}>
+                                        <td>{user.user_id}</td>
                                         <td>{user.first_name || 'N/A'}</td>
                                         <td>{user.last_name || 'N/A'}</td>
                                         <td>{user.email || 'N/A'}</td>
                                         <td>{user.password || 'N/A'}</td>
                                         <td>{user.phoneNum || 'N/A'}</td>
-                                        <td>{user.secuQues1 || 'N/A'}</td>
-                                        <td>{user.answerSecuQues1 || 'N/A'}</td>
+                                        <td>{user.answerSecuQuest1 || 'N/A'}</td>
                                         <td>{user.admin === 1 ? 'True' : 'False'}</td>
                                     </tr>
                                 ))}
@@ -109,7 +108,7 @@ function UserForm({ user, onSubmit, onClose }) {
     };
     return (
         <div className="user-form">
-            <h2>Modify User Data</h2>
+            <h2>Update User:</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     First Name:
@@ -157,36 +156,29 @@ function UserForm({ user, onSubmit, onClose }) {
                     />
                 </label>
                 <label>
-                    Security Question:
-                    <input
-                        type="text"
-                        name="secuQues1"
-                        value={userData.secuQues1}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>
                     Answer to Security Question:
                     <input
-                        type="number"
-                        min='0'
-                        max='1'
-                        name="answerSecuQues1"
-                        value={userData.answerSecuQues1}
+                        type="text"
+                        name="answerSecuQuest1"
+                        value={userData.answerSecuQuest1}
                         onChange={handleChange}
                     />
                 </label>
                 <label>
                     Admin:
                     <input
-                        type="text"
+                        type="number"
+                        min='0'
+                        max='1'
                         name="admin"
                         value={userData.admin}
                         onChange={handleChange}
                     />
                 </label>
-                <button type="submit">Submit</button>
-                <button type="button" onClick={onClose}>Cancel</button>
+                <div className='buttons'>
+                    <button type="submit">Submit</button>
+                    <button type="button" onClick={onClose}>Cancel</button>
+                </div>
             </form>
         </div>
     );
