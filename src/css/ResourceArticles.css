@@ -1,0 +1,18 @@
+.articles-container {
+    display: flex;
+    justify-content: space-around; /* Adjust as needed */
+    flex-wrap: wrap;
+  }
+  
+  .article-card {
+    width: calc(33.333% - 20px); /* Adjust the subtraction value based on your margin/padding */
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .article-card img {
+    max-width: 100%;
+    height: auto;
+  }

@@ -21,10 +21,10 @@ const ResourcesPage = () => {
       });
           
       if (response.data.data) {
-        // Filter out events with missing or empty descriptions
+        //filter out events with missing or empty descriptions
         const filteredEvents = response.data.data.filter(event => event.description);
-        // Show only the top 6 events
-        setEvents(filteredEvents.slice(0, 6));
+        //show only the top 3 events
+        setEvents(filteredEvents.slice(0, 3));
         setErrorMessage('');
       } else if (response.data.message) {
         setEvents([]);
@@ -37,7 +37,7 @@ const ResourcesPage = () => {
   };
 
   return (
-    <div>
+    <div className='search-container'>
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label htmlFor="locationInput">Enter your city, state, or zipcode:</label>
@@ -46,7 +46,7 @@ const ResourcesPage = () => {
             id="locationInput"
             value={locationInput}
             onChange={handleLocationChange}
-            placeholder="E.g., New York, NY or 10001"
+            placeholder="Search for finance events near you"
             required
           />
           <button type="submit">Search</button>
