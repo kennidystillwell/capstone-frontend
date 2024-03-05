@@ -1,0 +1,17 @@
+.resources-flex-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    height: calc(100vh - var(--navbar-height) - var(--footer-height));
+  }
+  
+  .resources-flex-container > div {
+    flex-basis: 50%;
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .resources-flex-container {
+      flex-direction: column;
+    }
+  }
