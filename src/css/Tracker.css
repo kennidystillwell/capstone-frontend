@@ -1,30 +1,34 @@
+/* Make the chart medium size, increase size of key, add padding to the tracker, finish goal functionality,   */
+
 .tracker {
   display: flex;
   align-items: stretch;
   justify-content: center;
   min-height: 100vh;
-  padding: 50px 0;
+  padding: 50px;
 }
 
 .form-tracker {
   flex: 0 0 600px;
-  
+  background-color: white;
   padding: 2rem;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
+  margin-left: 5rem;
 }
 
 .chart-tracker {
-  flex: 0 0 600px; 
+  flex: 0 0 600px !important; 
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 50;
 }
 
-.chart-tracker canvas {
-  width: 100%;
-  height: 100%;
-}
+/* .chart-tracker canvas {
+  width: 80% !important;
+  height: 80% !important; 
+} */
 
 .tabs {
   position: relative;

@@ -49,7 +49,7 @@ const ResourcesPage = () => {
             placeholder="Search for finance events near you"
             required
           />
-          <button type="submit">Search</button>
+          <button type="submit" id='test'>Search</button>
         </div>
       </form>
       {errorMessage ? (
