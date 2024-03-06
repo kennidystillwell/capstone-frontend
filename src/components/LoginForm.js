@@ -21,8 +21,7 @@ const LoginForm = () => {
       if (response.status === 200) {
         //update user state using login function
         login({
-          ...response.data,
-          isAdmin: response.data.isAdmin === 1
+          ...response.data
         });
         setError('');
       } else {
@@ -36,11 +35,11 @@ const LoginForm = () => {
 
   //render different content for admin and non-admin users
   if (user) {
-    if (user.isAdmin) {
+    if (user.redirect === '/admin') {
       //content for admin users
       return (
         <div className="welcome-message">
-          <h4>Welcome, {user.firstName}!</h4>
+          <h4>{user.message}!</h4>
           <button className="btn waves-effect waves-light" onClick={() => navigate('/admin')}>
             Manage Users
           </button>
@@ -50,7 +49,7 @@ const LoginForm = () => {
       //content for regular users
       return (
         <div className="welcome-message">
-          <h4>Welcome, {user.firstName}!</h4>
+          <h4>{user.message}!</h4>
           <p>Update your personal budget!</p>
           <Link to="/budget-tracker" className="btn waves-effect waves-light">Budget Tracker</Link>
         </div>
@@ -75,20 +74,20 @@ const LoginForm = () => {
         </div>
         <div className="input-field password-input">
           <input
-          id="password"
-          type={showPassword ? 'text' : 'password'}
-          className="validate"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+            id="password"
+            type={showPassword ? 'text' : 'password'}
+            className="validate"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
           />
-        <button
-          type="button"
-          className="btn-toggle-password"
-          onClick={() => setShowPassword(!showPassword)} 
-        >
-          {showPassword ? 'Hide' : 'Show'}
-        </button>
+          <button
+            type="button"
+            className="btn-toggle-password"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? 'Hide' : 'Show'}
+          </button>
         </div>
         {error && <p className="error">{error}</p>}
         <button className="btn waves-effect waves-light" type="submit">
