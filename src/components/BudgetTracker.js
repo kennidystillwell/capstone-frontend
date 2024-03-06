@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Chart, PieController, ArcElement, CategoryScale, Title, Legend } from 'chart.js';
+import { Chart, PieController, ArcElement, CategoryScale, Title, Legend, Tooltip } from 'chart.js';
 import taxData from '../data/tax.json';
 import Select from 'react-select';
 import { Tab, Tabs } from 'react-bootstrap';
@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
 // Have to register stuff I want to use for Chart.js here and in the import above!
-Chart.register(PieController, ArcElement, CategoryScale, Title, Legend);
+Chart.register(PieController, ArcElement, CategoryScale, Title, Legend, Tooltip);
 
 // Options for the Select components
 const payFrequencyOptions = [
@@ -120,12 +120,11 @@ function BudgetTracker() {
   }, [finalIncome, expenses, federalTaxes, stateTaxes]);
 
 
-  // Using React's useEffect hook to update the chart when state variables change 
   useEffect(() => {
     if (chartRef.current) {
-        // Destroy the old chart instance if it exists 
+      // Destroy the old chart instance if it exists 
       if (chartInstanceRef.current) {
-          chartInstanceRef.current.destroy();
+        chartInstanceRef.current.destroy();
       }
       // Create a new chart instance with the updated state variables and store it in chartInstanceRef
       chartInstanceRef.current = new Chart(chartRef.current, {
@@ -137,20 +136,34 @@ function BudgetTracker() {
             backgroundColor: ['pink', 'purple', 'orange', 'yellow', 'blue']
           }]
         },
-        // Chart options if I want to add any plugins here I will also need to add them in the Chart.register() call at the top of the file !!!
-        //From what I saw there was no option for datalabels on chart.js but I have to check more but we may need another library for that!
         options: {
-            plugins: {
-              legend: {
-                display: true,
-                position: 'top',
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                font: {
+                  size: 25, // Adjust this value to change the size of the labels
+                },
               },
-              title: {
-                display: true,
-                text: 'Budget',
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  var label = context.label || '';
+  
+                  if (label) {
+                    label += ': ';
+                  }
+                  if (context.parsed.y !== null) {
+                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                  }
+                  return label;
+                }
               }
             }
           }
+        }
       });
     }
   }, [chartRef, remainingIncome, federalTaxes, stateTaxes, expenses, finalIncome]);
@@ -334,10 +347,11 @@ return (
       <button className="summary-button" onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses, remainingIncome } })}> Go to Summary </button>
     </div>
     <div className="chart-tracker">
-      <canvas ref={chartRef} />
-    </div>
+  <canvas ref={chartRef} />
+</div>
   </div>
 );
 }
+
 
 export default BudgetTracker;
