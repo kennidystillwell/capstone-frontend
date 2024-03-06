@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/SignUp.css';
-import axios
-  from 'axios';
+import axios from 'axios';
+
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -15,20 +16,19 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(firstName, lastName, email)
     try {
-
       const response = await axios.post('http://localhost:5000/signup', {
         first_name: firstName,
         last_name: lastName,
         email,
         phoneNum: phone,
         password,
-        answerSecuQuest1: securityQuestion
+        answerSecuQuest1: securityQuestion,
       });
 
       if (response.status === 200) {
         console.log(response.data.message);
+        navigate('/login'); //redirect to the login page upon successful account creation
       } else {
         setError(response.data.error);
       }
@@ -51,6 +51,7 @@ const SignUpForm = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder="First Name"
+              required
             />
           </div>
           <div className="input-field">
@@ -61,6 +62,7 @@ const SignUpForm = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               placeholder="Last Name"
+              required
             />
           </div>
           <div className="input-field">
@@ -71,6 +73,7 @@ const SignUpForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
+              required
             />
           </div>
           <div className="input-field">
@@ -81,6 +84,7 @@ const SignUpForm = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="Phone Number"
+              required
             />
           </div>
           <div className="input-field password-input">
@@ -91,6 +95,7 @@ const SignUpForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
+              required
             />
             <button
               type="button"
@@ -108,6 +113,7 @@ const SignUpForm = () => {
               value={securityQuestion}
               onChange={(e) => setSecurityQuestion(e.target.value)}
               placeholder="Security Question: What is your mother's maiden name?"
+              required
             />
           </div>
           {error && <p className="error">{error}</p>}
