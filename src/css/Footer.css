@@ -1,5 +1,4 @@
-.bottom-footer {
-    position: fixed;
+.page-footer {
     width: 100%;
     bottom: 0;
     z-index: 9999;
