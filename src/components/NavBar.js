@@ -39,32 +39,10 @@ const Navbar = () => {
             Budget Buddy
           </a>
           <ul className="right hide-on-med-and-down">
-            <li>
-              <Link to="/budget-tracker" onClick={handleLinkClick}>
-                Budget Tracker
-              </Link>
-            </li>
-            <li>
-              <Link to="/resources" onClick={handleLinkClick}>
-                Resources
-              </Link>
-            </li>
-            {user ? ( //conditionally render based on user authentication status
-              <>
-                <li>
-                  <span>Welcome, {user.firstName} {user.lastName}</span>
-                </li>
-                <li>
-                  <button onClick={logout}>Logout</button>
-                </li>
-              </>
-            ) : (
-              <li>
-                <Link to="/login" onClick={handleLinkClick}>
-                  Login
-                </Link>
-              </li>
-            )}
+            <li><Link to="/budget-tracker" onClick={handleLinkClick}>Budget Tracker</Link></li>
+            <li><Link to="/resources" onClick={handleLinkClick}>Resources</Link></li>
+            {user && <li><Link to="/" onClick={(e) => {e.preventDefault(); logout();}}>Logout</Link></li>}
+            {!user && <li><Link to="/login" onClick={handleLinkClick}>Login</Link></li>}
           </ul>
           <ul
             id="nav-mobile"
@@ -73,32 +51,10 @@ const Navbar = () => {
               transform: isOpen ? "translateX(0%)" : "translateX(-105%)",
             }}
           >
-            <li>
-              <Link to="/budget-tracker" onClick={handleLinkClick}>
-                Budget Tracker
-              </Link>
-            </li>
-            <li>
-              <Link to="/resources" onClick={handleLinkClick}>
-                Resources
-              </Link>
-            </li>
-            {user ? (
-              <>
-                <li>
-                  <span>Welcome, {user.firstName} {user.lastName}</span>
-                </li>
-                <li>
-                  <button onClick={logout}>Logout</button>
-                </li>
-              </>
-            ) : (
-              <li>
-                <Link to="/login" onClick={handleLinkClick}>
-                  Login
-                </Link>
-              </li>
-            )}
+            <li><Link to="/budget-tracker" onClick={handleLinkClick}>Budget Tracker</Link></li>
+            <li><Link to="/resources" onClick={handleLinkClick}>Resources</Link></li>
+            {user && <li><Link to="/" onClick={(e) => {e.preventDefault(); logout();}}>Logout</Link></li>}
+            {!user && <li><Link to="/login" onClick={handleLinkClick}>Login</Link></li>}
           </ul>
           <a
             href="#"

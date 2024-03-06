@@ -22,6 +22,41 @@
     margin: 0 auto;
 }
 
+.welcome-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.welcome-message h4 {
+  margin: 0 0 20px 0;
+}
+
+.welcome-message p,
+.welcome-message a {
+  margin-bottom: 15px;
+  text-align: center;
+  width: 100%;
+}
+
+.welcome-message a {
+  display: inline-block;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.welcome-message a:hover {
+  background-color: #4caf50; 
+}
+
 @media (max-width: 575px) {
   .login-container {
     max-width: 95%;
@@ -44,3 +79,4 @@
     max-width: 70%; 
   }
 }
+
