@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LogoFacebook from "../images/facebook.png";
-import LogoInstagram from "../images/instagram.png";
-import LogoTwitter from "../images/twitter.png";
 import '../css/Footer.css';
 
 const Footer = () => {
+  const logoFacebook = `${process.env.PUBLIC_URL}/images/facebook.png`;
+  const logoInstagram = `${process.env.PUBLIC_URL}/images/instagram.png`;
+  const logoTwitter = `${process.env.PUBLIC_URL}/images/twitter.png`;
+
   return (
     <footer className="page-footer green lighten-1">
       <div className="container">
@@ -28,13 +29,13 @@ const Footer = () => {
             <h5 className="white-text">Connect With Us</h5>
             <div className="social-icons">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <img src={LogoFacebook} alt="Facebook" className="social-icon"/>
+                <img src={logoFacebook} alt="Facebook" className="social-icon"/>
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <img src={LogoInstagram} alt="Instagram" className="social-icon"/>
+                <img src={logoInstagram} alt="Instagram" className="social-icon"/>
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                <img src={LogoTwitter} alt="Twitter" className="social-icon"/>
+                <img src={logoTwitter} alt="Twitter" className="social-icon"/>
               </a>
             </div>
           </div>

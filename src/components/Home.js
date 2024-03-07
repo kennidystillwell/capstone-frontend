@@ -1,13 +1,14 @@
 import React from 'react';
 import HomeNav from './HomeNav';
 import '../css/Home.css';
-import banner from '../images/banner.webp';
 
 const Home = () => {
+  const bannerSrc = process.env.PUBLIC_URL + '/images/banner.webp';
+
   return (
     <div>
       <div className="hero-banner">
-        <img src={banner} alt="Hero Banner" className="banner-image" />
+        <img src={bannerSrc} alt="Hero Banner" className="banner-image" />
       </div>
       <div className="custom-row">
         <div className="card-container">
