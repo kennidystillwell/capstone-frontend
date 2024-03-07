@@ -99,9 +99,9 @@ function BudgetTracker() {
   const [other, setOther] = useState(0);
   const [budgetStartDate, setBudgetStartDate] = useState('');
   const [payDateEndDate, setPayDateEndDate] = useState('');
-  const [goalTotal, setGoalTotal] = useState(0);
-  const [goalAmount, setGoalAmount] = useState(0);
-  const [goalFrequency, setGoalFrequency] = useState('');
+  const [savingsTotal, setsavingsTotal] = useState(0);
+  const [savingsAmount, setsavingsAmount] = useState(0);
+  const [savingsFrequency, setsavingsFrequency] = useState('');
   const [expenses, setExpenses] = useState(0);
   const [remainingIncome, setRemainingIncome] = useState(0);
 
@@ -134,9 +134,9 @@ function BudgetTracker() {
       chartInstanceRef.current = new Chart(chartRef.current, {
         type: 'pie',
         data: {
-          labels: ['Net Income', 'Federal Taxes', 'State Taxes', 'Expenses', 'Goal'],
+          labels: ['Net Income', 'Federal Taxes', 'State Taxes', 'Expenses', 'Savings'],
           datasets: [{
-            data: [remainingIncome, federalTaxes, stateTaxes, expenses, goalAmount],
+            data: [remainingIncome, federalTaxes, stateTaxes, expenses, savingsAmount],
             backgroundColor: ['green', 'blue', 'yellow', 'red', 'purple']
           }]
         },
@@ -166,11 +166,15 @@ function BudgetTracker() {
                 }
               }
             }
+          },
+          onResize: function(chart, size) {
+            var chartSize = Math.min(size.width, size.height);
+            chart.options.plugins.legend.labels.font.size = chartSize > 500 ? 25 : 15; 
           }
         }
       });
     }
-  }, [chartRef, remainingIncome, federalTaxes, stateTaxes, expenses, finalIncome, goalAmount]);
+  }, [chartRef, remainingIncome, federalTaxes, stateTaxes, expenses, finalIncome, savingsAmount]);
 
   
 
@@ -331,26 +335,26 @@ return (
           </label>
         </Tab>
 
-        <Tab eventKey="goal" title="Goal">
+        <Tab eventKey="savings" title="savings">
           <label>
-            Goal Total Amount:
-            <input type="number" value={goalTotal} onChange={e => setGoalTotal(e.target.value )} />
+            Savings Total Amount:
+            <input type="number" value={savingsTotal} onChange={e => setsavingsTotal(e.target.value )} />
           </label>
           <label>
-            Goal Contribution Amount:
-            <input type="number" value={goalAmount} onChange={e => setGoalAmount(e.target.value)} />
+            Savings Contribution Amount:
+            <input type="number" value={savingsAmount} onChange={e => setsavingsAmount(e.target.value)} />
           </label>
           <label>
-            Goal Contribution Frequency:
+            Savings Contribution Frequency:
           <Select
             options={frequencyOptions}
-            value={frequencyOptions.find(option => option.value === goalFrequency)}
-            onChange={(selectedOption) => setGoalFrequency(selectedOption.value)}
+            value={frequencyOptions.find(option => option.value === savingsFrequency)}
+            onChange={(selectedOption) => setsavingsFrequency(selectedOption.value)}
           />
           </label>
         </Tab>
       </Tabs>
-      <button className="summary-button" onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses, remainingIncome, goalAmount } })}> Go to Summary </button>
+      <button className="summary-button" onClick={() => navigate('/summary', { state: { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses, remainingIncome, savingsAmount } })}> Go to Summary </button>
     </div>
     <div className="chart-tracker">
   <canvas ref={chartRef} />

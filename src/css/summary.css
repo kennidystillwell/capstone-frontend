@@ -20,7 +20,16 @@
   
     .summary-content, .chart-container {
       width: 90%;
-      padding: 1rem;
+      width: 95%;
+      margin: 3rem;
+    }
+
+    .summary-content h2{
+      font-size: 2rem;
+    }
+
+    .chart-container {
+      padding-top: 75PX;
     }
   }
   
