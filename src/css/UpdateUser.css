@@ -25,7 +25,7 @@
     z-index: 15;
     width: 500px;
     max-height: 50vh;
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: auto; /* enable vertical scrolling */
     padding-bottom: 20px; 
     margin-bottom: 20px; 
 }

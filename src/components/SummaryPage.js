@@ -56,7 +56,7 @@ function SummaryPage() {
         <p>State: {state}</p>
         <p>Expenses: {expenses}</p>
         <p>Goal Amount: {goalAmount}</p>
-        <h2>Final Amount: {remainingIncome}</h2>
+        <h2>Final Amount: {remainingIncome.toFixed(2)}</h2>
       </div>
       <div className="chart-container">
         <canvas ref={chartRef} />

@@ -18,14 +18,14 @@
   align-items: center;
   gap: 20px;
   padding-top: 20px;
-  width: 100%; /* Ensure container fills its parent to center children properly */
+  width: 100%;
 }
 
 .event-card {
   text-align: center;
-  width: 100%; /* Adjust if you want to change the width of cards */
+  width: 100%;
   padding: 20px;
-  margin: 0 auto; /* Center the card within its container */
+  margin: 0 auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
 }
