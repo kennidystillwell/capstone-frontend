@@ -1,6 +1,6 @@
 import React from 'react';
 import Summary from './components/SummaryPage'
-import './css/summary.css'; // Import the CSS file
+import './css/summary.css';
 
 const BudgetTracker = () => {
     return (
