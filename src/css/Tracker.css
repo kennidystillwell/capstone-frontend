@@ -16,6 +16,9 @@
   overflow-y: auto;
   margin-left: 5rem;
 }
+.nav-tabs .nav-link {
+  color: #000; /* Change this to the color you want */
+}
 
 .chart-tracker {
   flex: 0 0 600px !important; 
@@ -24,11 +27,6 @@
   align-items: center;
   width: 50;
 }
-
-/* .chart-tracker canvas {
-  width: 80% !important;
-  height: 80% !important; 
-} */
 
 .tabs {
   position: relative;
