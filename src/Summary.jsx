@@ -6,7 +6,7 @@ const BudgetTracker = () => {
     return (
         <div>
             <div className="container">
-                <h1>Welcome to the Summary!</h1>
+                {/* <h1>Welcome to the Summary!</h1> */}
             </div>
             <Summary /> 
         </div>
