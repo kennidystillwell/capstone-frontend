@@ -120,7 +120,7 @@ function BudgetTracker() {
     setRemainingIncome(finalIncome - expenses - federalTaxes - stateTaxes);
     console.log('Remaining Income:', remainingIncome)
     console.log('Final Income:', finalIncome)
-  }, [finalIncome, expenses, federalTaxes, stateTaxes]);
+  }, [finalIncome, expenses, federalTaxes, stateTaxes, remainingIncome]);
 
   
 
@@ -134,7 +134,7 @@ function BudgetTracker() {
       chartInstanceRef.current = new Chart(chartRef.current, {
         type: 'pie',
         data: {
-          labels: ['Income', 'Federal Taxes', 'State Taxes', 'Expenses', 'Goal'],
+          labels: ['Net Income', 'Federal Taxes', 'State Taxes', 'Expenses', 'Goal'],
           datasets: [{
             data: [remainingIncome, federalTaxes, stateTaxes, expenses, goalAmount],
             backgroundColor: ['green', 'blue', 'yellow', 'red', 'purple']
@@ -263,7 +263,7 @@ return (
       <Tabs defaultActiveKey="income" className="flex-grow-1 tabs">
         <Tab eventKey="income" title="Income">
           <label>
-            Income:
+            Gross Income:
             <input type="number" value={inputIncome} onChange={(e) => setInputIncome(Number(e.target.value))} />
           </label>
           <label>

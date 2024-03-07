@@ -12,7 +12,7 @@ function SummaryPage() {
       const chartInstance = new Chart(chartRef.current, {
         type: 'pie',
         data: {
-          labels: ['Final Amount', 'Federal Taxes', 'State Taxes', 'Expenses', 'Goal'],
+          labels: ['Net Amount', 'Federal Taxes', 'State Taxes', 'Expenses', 'Goal'],
           datasets: [{
             data: [remainingIncome, federalTaxes, stateTaxes, expenses, goalAmount],
             backgroundColor: ['green', 'blue', 'yellow', 'red', 'purple'],
@@ -48,7 +48,7 @@ function SummaryPage() {
     <div className="tracker">
       <div className="summary-content">
         <h2>Summary</h2>
-        <p>Income: {income.toFixed(2)}</p>
+        <p>Gross Income: {income.toFixed(2)}</p>
         <p>Federal Taxes: {federalTaxes.toFixed(2)}</p>
         <p>State Taxes: {stateTaxes.toFixed(2)}</p>
         <p>Pay Frequency: {payFrequency}</p>
@@ -56,7 +56,7 @@ function SummaryPage() {
         <p>State: {state}</p>
         <p>Expenses: {expenses}</p>
         <p>Goal Amount: {goalAmount}</p>
-        <h2>Final Amount: {remainingIncome.toFixed(2)}</h2>
+        <h2>Net Amount: {remainingIncome.toFixed(2)}</h2>
       </div>
       <div className="chart-container">
         <canvas ref={chartRef} />
