@@ -54,4 +54,4 @@ The resources page allows the user to find articles, as well as events regarding
 
 The login page allows the user to sign into an existing account, or create an account if they don't currently have one.
 
-Enjoy Budget Buddy!
+## Enjoy Budget Buddy!
