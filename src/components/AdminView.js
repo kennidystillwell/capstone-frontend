@@ -11,7 +11,7 @@ export default function AdminView({ welcome }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:5000/admin');
+                const response = await axios.get('https://budget-buddies.glitch.me/admin');
                 const users = Object.values(response.data.users)
                 setData(users);
             } catch (error) {
@@ -27,7 +27,7 @@ export default function AdminView({ welcome }) {
 
     const handleSubmit = async (updatedUserData) => {
         try {
-            const response = await axios.put('http://localhost:5000/update', updatedUserData)
+            const response = await axios.put('https://budget-buddies.glitch.me/update', updatedUserData)
             if (response.status === 200) {
                 setData(prevData => prevData.map(user => user.user_id === updatedUserData.user_id ? updatedUserData : user));
                 setSelectUser(null);

@@ -14,7 +14,7 @@ const ResourcesPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get('http://localhost:5000/resources', {
+      const response = await axios.get('https://budget-buddies.glitch.me/resources', {
         params: {
           location: locationInput
         }

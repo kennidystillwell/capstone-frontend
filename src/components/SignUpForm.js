@@ -17,7 +17,7 @@ const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/signup', {
+      const response = await axios.post('https://budget-buddies.glitch.me/signup', {
         first_name: firstName,
         last_name: lastName,
         email,

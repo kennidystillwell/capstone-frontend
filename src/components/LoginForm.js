@@ -15,7 +15,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get('http://localhost:5000/login', {
+      const response = await axios.get('https://budget-buddies.glitch.me/login', {
         params: { email, password },
       });
       if (response.status === 200) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../css/ResourceArticles.css'; // Make sure to update this CSS file as described below
+import '../css/ResourceArticles.css';
 
 const ResourceArticles = () => {
   const [articles, setArticles] = useState([]);
@@ -14,7 +14,7 @@ const ResourceArticles = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get('http://localhost:5000/resources', {
+      const response = await axios.get('https://budget-buddies.glitch.me/resources', {
         params: {
           input: searchInput
         }
