@@ -4,8 +4,7 @@ import {Chart} from 'chart.js';
 
 function SummaryPage() {
   const location = useLocation();
-  const { income = 0, federalTaxes = 0, stateTaxes = 0, payFrequency = '', payType = '', state = '', expenses = 0, goalAmount = 0 } = location.state;
-  const finalAmount = (income - federalTaxes - stateTaxes - expenses - goalAmount).toFixed(2);
+  const { income = 0, federalTaxes = 0, stateTaxes = 0, payFrequency = '', payType = '', state = '', expenses = 0, goalAmount = 0, remainingIncome = 0 } = location.state;
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -15,7 +14,7 @@ function SummaryPage() {
         data: {
           labels: ['Final Amount', 'Federal Taxes', 'State Taxes', 'Expenses', 'Goal'],
           datasets: [{
-            data: [finalAmount, federalTaxes, stateTaxes, expenses, goalAmount],
+            data: [remainingIncome, federalTaxes, stateTaxes, expenses, goalAmount],
             backgroundColor: ['green', 'blue', 'yellow', 'red', 'purple'],
           }],
         },
@@ -41,7 +40,7 @@ function SummaryPage() {
       });
       return () => chartInstance.destroy();
     }
-  }, [finalAmount, federalTaxes, stateTaxes, expenses, goalAmount]);
+  }, [remainingIncome, federalTaxes, stateTaxes, expenses, goalAmount]);
 
   console.log('Props received by SummaryPage:', { income, federalTaxes, stateTaxes, payFrequency, payType, state, expenses });
 
@@ -57,7 +56,7 @@ function SummaryPage() {
         <p>State: {state}</p>
         <p>Expenses: {expenses}</p>
         <p>Goal Amount: {goalAmount}</p>
-        <h2>Final Amount: {finalAmount}</h2>
+        <h2>Final Amount: {remainingIncome}</h2>
       </div>
       <div className="chart-container">
         <canvas ref={chartRef} />
