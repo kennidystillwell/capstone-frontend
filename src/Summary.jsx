@@ -5,9 +5,6 @@ import './css/summary.css';
 const BudgetTracker = () => {
     return (
         <div>
-            <div className="container">
-                {/* <h1>Welcome to the Summary!</h1> */}
-            </div>
             <Summary /> 
         </div>
     );
