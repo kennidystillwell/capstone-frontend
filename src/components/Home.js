@@ -3,11 +3,12 @@ import HomeNav from './HomeNav';
 import '../css/Home.css';
 
 const Home = () => {
-  const bannerSrc = process.env.PUBLIC_URL + '/images/banner.webp';
+  const bannerSrc = `${process.env.PUBLIC_URL}/images/banner.webp`;
 
   return (
     <div>
       <div className="hero-banner">
+        {/* Use the bannerSrc variable for the src attribute */}
         <img src={bannerSrc} alt="Hero Banner" className="banner-image" />
       </div>
       <div className="custom-row">
