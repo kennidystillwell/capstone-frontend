@@ -335,7 +335,7 @@ return (
           </label>
         </Tab>
 
-        <Tab eventKey="savings" title="savings">
+        <Tab eventKey="savings" title="Savings">
           <label>
             Savings Total Amount:
             <input type="number" value={savingsTotal} onChange={e => setsavingsTotal(e.target.value )} />
