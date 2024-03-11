@@ -3,7 +3,7 @@ import HomeNav from './HomeNav';
 import '../css/Home.css';
 
 const Home = () => {
-  const bannerSrc = `${process.env.PUBLIC_URL}/images/banner.webp`;
+  const bannerSrc = `${process.env.PUBLIC_URL}/images/banner.jpg`;
 
   return (
     <div>
